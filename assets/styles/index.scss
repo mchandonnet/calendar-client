@@ -1,1 +1,58 @@
 @import '~bootstrap/scss/bootstrap';
+
+/* 
+$jan-color: #4287f5;
+$feb-color: #7dd3f5;
+$mar-color: #99db7f;
+$apr-color: #55b82e;
+$may-color: #f09cb2;
+$jun-color: #bd516d;
+$jul-color: #db1649;
+$aug-color: #CB5D15;
+$sep-color: #c47008;
+$oct-color: #ebc20e;
+$nov-color: #bf1300;
+$dec-color: #1b53cc; 
+*/
+
+
+.body {
+  margin: 0px;
+  max-width: 100%
+}
+
+
+.calendar-container {
+  max-width: 800px;
+  margin: 100px auto
+}
+
+.month-header {
+  border: 0px;
+  margin: 10px;
+  text-align: center;
+  height: 50px;
+  font-size: 36px;
+  line-height: 50px
+}
+
+.weekday-header {
+  border: 1px solid #c47008;
+  text-align: center;
+  background: #c47008;  
+}
+
+.weekday {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 50px;
+  margin: 2px;  
+  text-align: center;
+  font-size: 36px;
+  line-height: 50px
+}
+
+
+#loadOverlay {
+  display: none;
+}

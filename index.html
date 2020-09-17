@@ -1,17 +1,127 @@
 <!DOCTYPE html>
+
 <html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags-->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<head>
 
-      <!-- Do not add `script` tags-->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
-      <h1>Browser Template</h1>
-    </body>
+  <title>Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+
+  <div id="loadOverlay" style="background-color:#ffffff; position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;"></div>
+</head>
+
+
+
+      
+<body>
+
+  <!-- BEGIN LOGIN FORM SECTION -->
+  <section id="login-secion">
+    <form name="login-form" id="login-form">
+    
+        <div>
+
+        <div class="row">
+          <div class="accent-div-top col-12">User login</div>
+        </div>
+
+        <div class="row">
+          <div class="login col-12"></div>
+        </div>
+
+        <div class="row">
+          <div class="login col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="login-email"></div>
+        </div>
+
+        <div class="row">
+          <div class="login col-12"><input type="password" placeholder="password" name="credentials[password]" id="login-password"></div>
+        </div>
+
+        <div class="row">
+          <div class="login col-12"><p id="login-result"></p></div>
+        </div>
+
+        <div class="row">
+          <div class="login col-12"><input type="submit" name="login-submit" value="Sign In"></div>
+        </div>
+
+        <div class="row">
+          <div class="login col-12">
+            <a href="#" id="anchor-forgot-pw"><!-- Forgot username -or- password? --></a></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="login col-12"></div>
+        </div>
+
+        <div class="row">
+          <div class="accent-div-bottom login col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+        </div>
+
+      </div>
+
+    </form>
+  </section>
+  <!-- END LOGIN FORM SECTION -->
+
+
+
+
+
+
+
+
+  <!-- BEGIN CALENDAR SECTION -->
+  <section id="calendar-section">
+
+    <div class="calendar-container" id="calendar-container">
+  
+      <table class="table" id="calendar">
+        <thead id="calendar-header">
+          
+          <tr>
+            <td class="month-header" id="previous-month-button">&lt;</td>
+            <td  class="month-header" colspan="5" id="month-text">MONTH GOES HERE</td>
+            <td class="month-header" id="next-month-button">&gt;</td>
+          </tr>
+          
+          <tr>
+            <th class="weekday-header">Sun</th>
+            <th class="weekday-header">Mon</th>
+            <th class="weekday-header">Tue</th>
+            <th class="weekday-header">Wed</th>
+            <th class="weekday-header">Thu</th>
+            <th class="weekday-header">Fri</th>
+            <th class="weekday-header">Sat</th>
+          </tr>
+        </thead>
+  
+        <!-- START Placeholder for generated Calendar -->
+        <tbody id="calendar-days">
+  
+        </tbody>
+        <!-- END Placeholder for generated Calendar -->
+  
+      </table>
+  
+    </div>
+
+
+  </section>
+  <!-- END CALENDAR SECTION -->
+
+
+</body>
+
+
+
+    
 </html>
