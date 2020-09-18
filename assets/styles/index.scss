@@ -18,13 +18,20 @@ $dec-color: #1b53cc;
 
 .body {
   margin: 0px;
-  max-width: 100%
+  max-width: 100%;
 }
 
+.outer-container {
+  margin: 100px auto;
+  padding: 25px;
+}
 
 .calendar-container {
   max-width: 400px;
-  margin: 50px auto auto 75px
+}
+
+.forms-container {
+  max-width: 500px;
 }
 
 .month-header {

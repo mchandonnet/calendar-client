@@ -16,9 +16,18 @@ const months = [
   'December'
 ]
 
-// const changeCalendar = function (month, year) {
-//   buildCalendar(month, year)
-// }
+let globalMonth
+let globalYear
+
+// event listener for getting prev month
+$('#previous-month-button').on('click', function () {
+  getPrevMonth(globalMonth, globalYear)
+})
+
+// event listener for getting next month
+$('#next-month-button').on('click', function () {
+  getNextMonth(globalMonth, globalYear)
+})
 
 const getPrevMonth = function (month, year) {
   const currentDate = new Date(`${month}, 1 ${year}`)
@@ -39,6 +48,8 @@ const getNextMonth = function (month, year) {
 }
 
 const buildCalendar = function (month, year) {
+  globalMonth = month
+  globalYear = year
   // create a variable to store the html data...  and start with an empty value to clear it with each function call
   let calHTML = ''
 
@@ -60,16 +71,6 @@ const buildCalendar = function (month, year) {
 
   // display the month and year at the top of the calendar
   $('#month-text').html(`${month}, ${year}`)
-
-  // event listener for getting prev month
-  $('#previous-month-button').on('click', function () {
-    getPrevMonth(month, year)
-  })
-
-  // event listener for getting next month
-  $('#next-month-button').on('click', function () {
-    getNextMonth(month, year)
-  })
 
   // Create the Rows of the TABLE.. a calendar can never have more than 6 rows (weeks)
   for (let i = 0; i <= 5; i++) {
@@ -95,6 +96,7 @@ const buildCalendar = function (month, year) {
   }
 
   $('#calendar-days').html(calHTML)
+  console.log(month + year)
 }
 
 module.exports = {

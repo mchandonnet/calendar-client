@@ -2,7 +2,7 @@
 
 const api = require('./api')
 const ui = require('./ui')
-const store = ('require')
+const store = require('./store')
 
 const getUserEvents = function () {
   api.apiCall('/events', 'GET', '{}', true)

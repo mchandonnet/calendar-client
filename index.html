@@ -26,8 +26,9 @@
   <div class="outer-container">
 
     <div class="row">
+      <div class="col-12 col-lg-1"></div>
       <!-- This DIV will hold the calendar -->
-      <div class="col-6">
+      <div class="col-12 col-lg-5">
 
 
         <!-- BEGIN CALENDAR SECTION -->
@@ -39,9 +40,9 @@
               <thead id="calendar-header">
                 
                 <tr>
-                  <td class="month-header" id="previous-month-button">&lt;</td>
+                  <td class="month-header"><a href="#" id="previous-month-button">&lt;</a></td>
                   <td  class="month-header" colspan="5" id="month-text">MONTH GOES HERE</td>
-                  <td class="month-header" id="next-month-button">&gt;</td>
+                  <td class="month-header"><a href="#" id="next-month-button">&gt;</a></td>
                 </tr>
                 
                 <tr>
@@ -76,62 +77,62 @@
 
 
       <!-- This DIV will hold EVERYTHING ELSE -->
-      <div class="col-6">
+      <div class="col-12 col-lg-6">
 
 
 
         <!-- BEGIN REGISTER FORM SECTION -->
         <section id="register-section">      
           <form name="register-form" id="register-form">          
-            <div class="container">
+            <div class="forms-container">
 
               <div class="row">
-                <div class="accent-div-top col-12">Register User</div>
+                <div class="col-12">Register User</div>
               </div>
 
               <div class="row">
-                <div class="login col-12"></div>
+                <div class="col-12"></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"><input type="text" placeholder="First Name" name="credentials[firstName]" id="register-firstName" required></div>
+                <div class="col-12"><input type="text" placeholder="First Name" name="credentials[firstName]" id="register-firstName" required></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"><input type="text" placeholder="lastName" name="credentials[lastName]" id="register-lastName" required></div>
+                <div class="col-12"><input type="text" placeholder="lastName" name="credentials[lastName]" id="register-lastName" required></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="register-email" required></div>
+                <div class="col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="register-email" required></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"><input type="password" placeholder="password" name="credentials[password]" id="register-password" required></div>
+                <div class="col-12"><input type="password" placeholder="password" name="credentials[password]" id="register-password" required></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"><input type="password" placeholder="confirm password" name="credentials[password_confirmation]" id="register-confirmation" required></div>
+                <div class="col-12"><input type="password" placeholder="confirm password" name="credentials[password_confirmation]" id="register-confirmation" required></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"><p id="registration-result"></p></div>
+                <div class="col-12"><p id="registration-result"></p></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"><input type="submit" name="register-submit" value="Create User"></div>
+                <div class="col-12"><input type="submit" name="register-submit" value="Create User"></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"></div>
+                <div class="col-12"></div>
               </div>
 
               <div class="row">
-                <div class="login col-12"></div>
+                <div class="col-12"></div>
               </div>
 
 
               <div class="row">
-                <div class="accent-div-bottom login col-12"><a href="#" id="anchor-login">Already a user?  Click here to login</a></div>
+                <div class="col-12"><a href="#" id="anchor-login">Already a user?  Click here to login</a></div>
               </div>
 
 
@@ -196,7 +197,7 @@
 
 
 
-        <!-- BEGIN LOGIN FORM SECTION -->
+        <!-- BEGIN CHANGE PASSWORD FORM SECTION -->
         <section id="change password-secion">
           <form name="change-password-form" id="change-password-form">
           
@@ -211,14 +212,10 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="login-email"></div>
-              </div>
-
-              <div class="row">
-                <div class="col-12"><input type="password" placeholder="password" name="credentials[password]" id="change-password"></div>
+                <div class="col-12"><input type="password" placeholder="password" name="passwords[old]" id="change-password-old"></div>
               </div>
               <div class="row">
-                <div class="col-12"><input type="password" placeholder="confirm password" name="credentials[password_confirmation]" id="change-password-confirmation"></div>
+                <div class="col-12"><input type="password" placeholder="confirm password" name="passwords[new]" id="change-password-new"></div>
               </div>
 
               <div class="row">

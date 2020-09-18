@@ -36,6 +36,21 @@ const onRegisterUser = function (event) {
     .catch(ui.onRegisterFailure)
 }
 
+// change password event handler
+const onChangePassword = function (event) {
+  // prevent the default action
+  event.preventDefault()
+  // get the form from the event object
+  const form = event.target
+  // use getFormFields() to get the data from the form
+  const data = getFormFields(form)
+  api.apiCall('/change-password', 'PATCH', data, true)
+  // handle SUCCESSFUL response
+    .then(ui.onChangePasswordSuccess)
+  // handle ERROR response
+    .catch(ui.onChangePasswordFailure)
+}
+
 // create event handler
 const onCreateEvent = function (event) {
   // prevent the default action for the event
@@ -54,5 +69,6 @@ const onCreateEvent = function (event) {
 module.exports = {
   onSignIn: onSignIn,
   onRegisterUser: onRegisterUser,
-  onCreateEvent: onCreateEvent
+  onCreateEvent: onCreateEvent,
+  onChangePassword: onChangePassword
 }

@@ -20,6 +20,8 @@ $(() => {
   $('#login-form').on('submit', events.onSignIn)
   // registration
   $('#register-form').on('submit', events.onRegisterUser)
+  // change password
+  $('#change-password-form').on('submit', events.onChangePassword)
   // create event
   $('#create-event-form').on('submit', events.onCreateEvent)
 
