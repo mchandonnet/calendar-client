@@ -9,14 +9,14 @@ const apiCall = function (url, method, data, auth) {
 
   if (auth) {
     ajaxCall.headers = {
-      Authorization: `Authorization: Bearer ${store.user.token}`
+      Authorization: `Bearer ${store.user.token}`
     }
   }
 
   if (data) {
     ajaxCall.data = data
   }
-
+  console.log('api call: ', ajaxCall)
   return $.ajax(ajaxCall)
 }
 

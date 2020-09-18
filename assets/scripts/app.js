@@ -6,7 +6,7 @@ const events = require('./events')
 // const currentMonth = today.getMonth() + 1
 // const currentYear = today.getFullYear()
 
-// const calendar = require('./calendar')
+const calendar = require('./calendar')
 
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')
@@ -15,9 +15,14 @@ const events = require('./events')
 // require('./example')
 
 $(() => {
-  // create event handlers for form submissions
+  // create event listener for form submissions
+  // login
   $('#login-form').on('submit', events.onSignIn)
+  // registration
+  $('#register-form').on('submit', events.onRegisterUser)
+  // create event
+  $('#create-event-form').on('submit', events.onCreateEvent)
 
   // build and display the calendar on page load!
-  // calendar.buildCalendar(currentMonth, currentYear)
+  calendar.buildCalendar('September', 2020)
 })

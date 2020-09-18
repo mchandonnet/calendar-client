@@ -2,46 +2,55 @@
 
 // get the first day of the month, and the day that it occurs on
 const months = [
-  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
 
-// create a default date String for which calendar to show first (the current month)
-const today = new Date()
-const defaultMonth = months[today.getMonth()]
-const defaultYear = today.getFullYear()
-const defaultDate = `${defaultMonth} 1, ${defaultYear}`
-let showCalendar = defaultDate
+// const changeCalendar = function (month, year) {
+//   buildCalendar(month, year)
+// }
 
-// get the day of the week for the first day of a given month 
-const getFirstDay = function (showMonth) {
-  return showMonth.getDay()
+const getPrevMonth = function (month, year) {
+  const currentDate = new Date(`${month}, 1 ${year}`)
+  const currentMonth = months[currentDate.getMonth()]
+  const prevMonth = (currentMonth === 'January') ? months[11] : months[currentDate.getMonth() - 1]
+  const prevYear = (currentMonth === 'January') ? year - 1 : year
+  console.log(`buildCalendar(${prevMonth}, ${prevYear})`)
+  return buildCalendar(prevMonth, prevYear)
 }
 
-const changeCalendar = function (month, year) {
-  buildCalendar(month, year)
+const getNextMonth = function (month, year) {
+  const currentDate = new Date(`${month}, 1 ${year}`)
+  const currentMonth = months[currentDate.getMonth()]
+  const nextMonth = (currentMonth === 'December') ? months[0] : months[currentDate.getMonth() + 1]
+  const nextYear = (currentMonth === 'December') ? year + 1 : year
+  console.log(`buildCalendar(${nextMonth}, ${nextYear})`)
+  return buildCalendar(nextMonth, nextYear)
 }
 
 const buildCalendar = function (month, year) {
   // create a variable to store the html data...  and start with an empty value to clear it with each function call
   let calHTML = ''
 
-  // define the next and previous months for buttons...start by getting the index of the current month
-  const thisMonth = months.indexOf(month)
-  const nextMonth = months[thisMonth + 1]
-  const prevMonth = months[thisMonth - 1]
-  console.log(thisMonth)
-  console.log(nextMonth)
-  console.log(prevMonth)
-
   // build a date object to use a reference for the month we are displaying then get the first day of the month
   // we can't use date methods unles it's a data object
   const showMonth = new Date(`${month} 1, ${year}`)
-  const firstDay = getFirstDay(showMonth)
+  const firstDay = showMonth.getDay()
 
   // figure out how many days are in that month
-  // in Javascript, when we call new Data and give a 0 as the third parameter
-  // we are actually getting back to last day of the previous month...
-  // so, the month we want + 1
-  // new Date(our date string, date.getMonth() + 1, 0).getDate();  
+  // in Javascript, when we call new Date() and give a 0 as the third parameter
+  // we are actually getting back to last day of the previous month...so, the month we want + 1
+  // new Date(our date string, date.getMonth() + 1, 0).getDate();
   const daysInMonth = new Date(showMonth.getFullYear(), showMonth.getMonth() + 1, 0).getDate()
 
   // create a counter variable to know when to stop adding to the calendar
@@ -49,19 +58,21 @@ const buildCalendar = function (month, year) {
   // date > number of days in the month, break the loop
   let date = 1
 
-  // Not set up for jQuery??
-  // $('#calendar-days').html('This is a test')
-  document.querySelector('#month-text').innerHTML = month
-  document.querySelector('#previous-month-button').addEventListener('click', function () {
-    changeCalendar(prevMonth, '2020')
+  // display the month and year at the top of the calendar
+  $('#month-text').html(`${month}, ${year}`)
+
+  // event listener for getting prev month
+  $('#previous-month-button').on('click', function () {
+    getPrevMonth(month, year)
   })
-  document.querySelector('#next-month-button').addEventListener('click', function () {
-    changeCalendar(nextMonth, '2020')
+
+  // event listener for getting next month
+  $('#next-month-button').on('click', function () {
+    getNextMonth(month, year)
   })
 
   // Create the Rows of the TABLE.. a calendar can never have more than 6 rows (weeks)
   for (let i = 0; i <= 5; i++) {
-
     // create a table row
     calHTML += '<tr>'
     // now we need to create the cells of the table...
@@ -70,7 +81,6 @@ const buildCalendar = function (month, year) {
       // this creates the empty cells at the beginning of the month
       if (i === 0 && j < firstDay) {
         calHTML += '<td class="weekday"></td>'
-
         // if the current date (counting from 0) is GT the number of days in the month... BREAK the LOOP
       } else if (date > daysInMonth) {
         break
@@ -84,10 +94,7 @@ const buildCalendar = function (month, year) {
     calHTML += '</tr>'
   }
 
-  // Not set up for jQuery??
-  // $('#calendar-days').html('This is a test')
-  document.querySelector('#calendar-days').innerHTML = calHTML
-
+  $('#calendar-days').html(calHTML)
 }
 
 module.exports = {

@@ -4,7 +4,7 @@
 
 <head>
 
-  <title>Example</title>
+  <title>Calendar App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Do not add `link` tags-->
@@ -22,101 +22,338 @@
       
 <body>
 
-  <!-- BEGIN LOGIN FORM SECTION -->
-  <section id="login-secion">
-    <form name="login-form" id="login-form">
-    
-        <div>
 
-        <div class="row">
-          <div class="accent-div-top col-12">User login</div>
-        </div>
+  <div class="outer-container">
 
-        <div class="row">
-          <div class="login col-12"></div>
-        </div>
+    <div class="row">
+      <!-- This DIV will hold the calendar -->
+      <div class="col-6">
 
-        <div class="row">
-          <div class="login col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="login-email"></div>
-        </div>
 
-        <div class="row">
-          <div class="login col-12"><input type="password" placeholder="password" name="credentials[password]" id="login-password"></div>
-        </div>
+        <!-- BEGIN CALENDAR SECTION -->
+        <section id="calendar-section">
 
-        <div class="row">
-          <div class="login col-12"><p id="login-result"></p></div>
-        </div>
-
-        <div class="row">
-          <div class="login col-12"><input type="submit" name="login-submit" value="Sign In"></div>
-        </div>
-
-        <div class="row">
-          <div class="login col-12">
-            <a href="#" id="anchor-forgot-pw"><!-- Forgot username -or- password? --></a></span>
+          <div class="calendar-container" id="calendar-container">
+        
+            <table class="table" id="calendar">
+              <thead id="calendar-header">
+                
+                <tr>
+                  <td class="month-header" id="previous-month-button">&lt;</td>
+                  <td  class="month-header" colspan="5" id="month-text">MONTH GOES HERE</td>
+                  <td class="month-header" id="next-month-button">&gt;</td>
+                </tr>
+                
+                <tr>
+                  <th class="weekday-header">Sun</th>
+                  <th class="weekday-header">Mon</th>
+                  <th class="weekday-header">Tue</th>
+                  <th class="weekday-header">Wed</th>
+                  <th class="weekday-header">Thu</th>
+                  <th class="weekday-header">Fri</th>
+                  <th class="weekday-header">Sat</th>
+                </tr>
+              </thead>
+        
+              <!-- START Placeholder for generated Calendar -->
+              <tbody id="calendar-days">
+        
+              </tbody>
+              <!-- END Placeholder for generated Calendar -->
+        
+            </table>
+        
           </div>
-        </div>
 
-        <div class="row">
-          <div class="login col-12"></div>
-        </div>
 
-        <div class="row">
-          <div class="accent-div-bottom login col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
-        </div>
+        </section>
+        <!-- END CALENDAR SECTION -->
+
+
+      
+      </div>
+
+
+
+      <!-- This DIV will hold EVERYTHING ELSE -->
+      <div class="col-6">
+
+
+
+        <!-- BEGIN REGISTER FORM SECTION -->
+        <section id="register-section">      
+          <form name="register-form" id="register-form">          
+            <div class="container">
+
+              <div class="row">
+                <div class="accent-div-top col-12">Register User</div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="text" placeholder="First Name" name="credentials[firstName]" id="register-firstName" required></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="text" placeholder="lastName" name="credentials[lastName]" id="register-lastName" required></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="register-email" required></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="password" placeholder="password" name="credentials[password]" id="register-password" required></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="password" placeholder="confirm password" name="credentials[password_confirmation]" id="register-confirmation" required></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><p id="registration-result"></p></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="submit" name="register-submit" value="Create User"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+
+              <div class="row">
+                <div class="accent-div-bottom login col-12"><a href="#" id="anchor-login">Already a user?  Click here to login</a></div>
+              </div>
+
+
+            </div>
+          </form> 
+        </section>
+        <!-- END REGISTER FORM SECTION --> 
+
+
+
+
+        <!-- BEGIN LOGIN FORM SECTION -->
+        <section id="login-secion">
+          <form name="login-form" id="login-form">
+          
+              <div class="container">
+
+              <div class="row">
+                <div class="accent-div-top col-12">User login</div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="login-email"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="password" placeholder="password" name="credentials[password]" id="login-password"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><p id="login-result"></p></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="submit" name="login-submit" value="Sign In"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12">
+                  <a href="#" id="anchor-forgot-pw"><!-- Forgot username -or- password? --></a></span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="accent-div-bottom login col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+              </div>
+
+            </div>
+
+          </form>
+        </section>
+        <!-- END LOGIN FORM SECTION -->
+
+
+
+
+        <!-- BEGIN LOGIN FORM SECTION -->
+        <section id="change password-secion">
+          <form name="change-password-form" id="change-password-form">
+          
+              <div class="container">
+
+              <div class="row">
+                <div class="col-12">Change Password</div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="login-email"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"><input type="password" placeholder="password" name="credentials[password]" id="change-password"></div>
+              </div>
+              <div class="row">
+                <div class="col-12"><input type="password" placeholder="confirm password" name="credentials[password_confirmation]" id="change-password-confirmation"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"><p id="change-password-result"></p></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"><input type="submit" name="change-password-submit" value="Change Password"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <a href="#" id="anchor-forgot-pw"><!-- Forgot username -or- password? --></a></span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+              </div>
+
+            </div>
+
+          </form>
+        </section>
+        <!-- END LOGIN FORM SECTION -->
+
+
+
+
+
+
+        <!-- BEGIN EVENT CREATION FORM SECTION -->
+        <section id="create-event-secion">
+          <form name="create-event-form" id="create-event-form">
+          
+              <div class="container">
+
+              <div class="row">
+                <div class="accent-div-top col-12">Create an Event</div>
+              </div>
+
+              <!-- <div class="row">
+                <div class="login col-12"><input type="hidden" name="event[allDay]" id="create-all-day" value=false></div>
+              </div> -->
+
+              <div class="row">
+                <div class="login col-12"><input type="text" placeholder="Event Name" name="event[eventName]" id="create-event-name"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="text" placeholder="Notes" name="event[eventNotes]" id="create-event-notes"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="date" name="event[startDate]" id="create-start-date" min="2020-09-17" onkeydown="false"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12">
+                  <input type="time" placeholder="password" name="event[startTime]" id="create-start-time">
+                  &nbsp;-&nbsp;
+                  <input type="time" placeholder="example.domain.com" name="event[endTime]" id="create-end-time">
+                </div>
+              </div>
+
+              
+
+              <div class="row">
+                <div class="login col-12"><p id="create-event-result"></p></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><input type="submit" name="create-event-submit" value="Create Event"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="accent-div-bottom login col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+              </div>
+
+            </div>
+
+          </form>
+        </section>
+        <!-- END EVENT CREATION FORM SECTION -->
+
+
+
+
+        <!-- BEGIN EVENT LIST SECTION -->
+        <section id="show-event-secion">
+          
+          <div class="container">
+
+            <div class="row">
+              <div class="col-12"><h4>User Events:</h4></div>
+            </div>
+
+            <div class="row">
+              <div class="col-12" id="noEvents"></div>            
+            </div>
+
+            <div class="row">
+              <div class="col-12"><h6>Event Name</h6></div>            
+            </div>
+            <div class="row">
+              <div class="col-12">event notes</div>            
+            </div>
+            <div class="row">
+              <div class="col-12">start:time - end:time</div>            
+            </div>
+
+
+
+        </section>
+        <!-- BEGIN EVENT LIST SECTION -->
+
+
 
       </div>
 
-    </form>
-  </section>
-  <!-- END LOGIN FORM SECTION -->
-
-
-
-
-
-
-
-
-  <!-- BEGIN CALENDAR SECTION -->
-  <section id="calendar-section">
-
-    <div class="calendar-container" id="calendar-container">
-  
-      <table class="table" id="calendar">
-        <thead id="calendar-header">
-          
-          <tr>
-            <td class="month-header" id="previous-month-button">&lt;</td>
-            <td  class="month-header" colspan="5" id="month-text">MONTH GOES HERE</td>
-            <td class="month-header" id="next-month-button">&gt;</td>
-          </tr>
-          
-          <tr>
-            <th class="weekday-header">Sun</th>
-            <th class="weekday-header">Mon</th>
-            <th class="weekday-header">Tue</th>
-            <th class="weekday-header">Wed</th>
-            <th class="weekday-header">Thu</th>
-            <th class="weekday-header">Fri</th>
-            <th class="weekday-header">Sat</th>
-          </tr>
-        </thead>
-  
-        <!-- START Placeholder for generated Calendar -->
-        <tbody id="calendar-days">
-  
-        </tbody>
-        <!-- END Placeholder for generated Calendar -->
-  
-      </table>
-  
+      
     </div>
 
 
-  </section>
-  <!-- END CALENDAR SECTION -->
+
+  </div>
+
 
 
 </body>

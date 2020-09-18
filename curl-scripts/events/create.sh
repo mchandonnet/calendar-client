@@ -14,8 +14,7 @@ curl "${API}${URL_PATH}" \
       "eventNotes": "'"${NOTES}"'",
       "startDate": "'"${STARTDATE}"'",
       "startTime": "'"${STARTTIME}"'",
-      "endTime": "'"${ENDTIME}"'",
-      "allDay": "'"${ALLDAY}"'"
+      "endTime": "'"${ENDTIME}"'"
     }
   }'
 
