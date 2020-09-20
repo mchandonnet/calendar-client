@@ -62,6 +62,12 @@
               </tbody>
               <!-- END Placeholder for generated Calendar -->
         
+              <tfoot>
+                <tr>
+                  <th colspan="7" class="weekday-footer">Create a new event</th>
+                </tr>
+              </tfoot>
+
             </table>
         
           </div>
@@ -74,19 +80,20 @@
       
       </div>
 
-
+      <!-- this div is used for spacing!-->
+      <div class="col-12 col-lg-1"></div>
 
       <!-- This DIV will hold EVERYTHING ELSE -->
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-lg-4">
 
 
 
         <!-- BEGIN REGISTER FORM SECTION -->
         <section id="register-section">      
-          <form name="register-form" id="register-form">          
+          <form class="bootstrap-iso" name="register-form" id="register-form">          
             <div class="forms-container">
 
-              <div class="row">
+              <div class="row mb-4">
                 <div class="col-12">Register User</div>
               </div>
 
@@ -94,24 +101,37 @@
                 <div class="col-12"></div>
               </div>
 
-              <div class="row">
-                <div class="col-12"><input type="text" placeholder="First Name" name="credentials[firstName]" id="register-firstName" required></div>
+              Full Name<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="person"></ion-icon></span>
+                </div>
+                <input type="text" placeholder="First Name" class="form-control" name="credentials[firstName]" id="register-firstName" required>
+                <input type="text" placeholder="Last Name" class="form-control" name="credentials[lastName]" id="register-lastName" required>
               </div>
 
-              <div class="row">
-                <div class="col-12"><input type="text" placeholder="lastName" name="credentials[lastName]" id="register-lastName" required></div>
+              Email Address<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="mail"></ion-icon></span>
+                </div>
+                <input type="email" class="form-control" placeholder="example@domain.com" name="credentials[email]" id="register-email" required>
               </div>
 
-              <div class="row">
-                <div class="col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="register-email" required></div>
+              Password<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Password" name="credentials[password]" id="register-password" required>
               </div>
 
-              <div class="row">
-                <div class="col-12"><input type="password" placeholder="password" name="credentials[password]" id="register-password" required></div>
-              </div>
-
-              <div class="row">
-                <div class="col-12"><input type="password" placeholder="confirm password" name="credentials[password_confirmation]" id="register-confirmation" required></div>
+              Confirm Password<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Confirm Password" name="credentials[password_confirmation]" id="register-confirmation" required>
               </div>
 
               <div class="row">
@@ -119,7 +139,9 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><input type="submit" name="register-submit" value="Create User"></div>
+                <div class="col-12">
+                  <button class="btn btn-custom type="submit" name="register-submit" value="Create User">Create User</button>
+                </div>
               </div>
 
               <div class="row">
@@ -146,24 +168,32 @@
 
         <!-- BEGIN LOGIN FORM SECTION -->
         <section id="login-secion">
-          <form name="login-form" id="login-form">
+          <form class="bootstrap-iso"  name="login-form" id="login-form">
           
-              <div class="container">
+              <div class="forms-container">
 
-              <div class="row">
-                <div class="accent-div-top col-12">User login</div>
+              <div class="row mb-4">
+                <div class="col-12">User login</div>
               </div>
 
               <div class="row">
                 <div class="login col-12"></div>
               </div>
 
-              <div class="row">
-                <div class="login col-12"><input type="email" placeholder="example.domain.com" name="credentials[email]" id="login-email"></div>
+              Email Address<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="mail"></ion-icon></span>
+                </div>
+                <input type="email" class="form-control" placeholder="example@domain.com" name="credentials[email]" id="login-email" required>
               </div>
 
-              <div class="row">
-                <div class="login col-12"><input type="password" placeholder="password" name="credentials[password]" id="login-password"></div>
+              Password<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Password" name="credentials[password]" id="login-password" required>
               </div>
 
               <div class="row">
@@ -171,7 +201,9 @@
               </div>
 
               <div class="row">
-                <div class="login col-12"><input type="submit" name="login-submit" value="Sign In"></div>
+                <div class="col-12">
+                  <button class="btn btn-custom type="submit" name="login-submit" value="Sign In">Sign In</button>
+                </div>
               </div>
 
               <div class="row">
@@ -199,23 +231,32 @@
 
         <!-- BEGIN CHANGE PASSWORD FORM SECTION -->
         <section id="change password-secion">
-          <form name="change-password-form" id="change-password-form">
+          <form class="bootstrap-iso"  name="change-password-form" id="change-password-form">
           
-              <div class="container">
+              <div class="forms-container">
 
-              <div class="row">
-                <div class="col-12">Change Password</div>
-              </div>
+                <div class="row mb-4">
+                  <div class="col-12">Change Password</div>
+                </div>
 
               <div class="row">
                 <div class="col-12"></div>
               </div>
 
-              <div class="row">
-                <div class="col-12"><input type="password" placeholder="password" name="passwords[old]" id="change-password-old"></div>
+              Old Password<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Old Password" name="passwords[old]" id="change-password-old" required>
               </div>
-              <div class="row">
-                <div class="col-12"><input type="password" placeholder="confirm password" name="passwords[new]" id="change-password-new"></div>
+
+              New Password<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+                </div>
+                <input type="password" class="form-control" placeholder="New Password" name="passwords[new]" id="change-password-new" required>
               </div>
 
               <div class="row">
@@ -223,7 +264,9 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><input type="submit" name="change-password-submit" value="Change Password"></div>
+                <div class="col-12">
+                    <button class="btn btn-custom" type="submit" name="change-password-submit" value="Change Password">Change Password</button>
+                </div>
               </div>
 
               <div class="row">
@@ -253,54 +296,90 @@
 
         <!-- BEGIN EVENT CREATION FORM SECTION -->
         <section id="create-event-secion">
-          <form name="create-event-form" id="create-event-form">
+          <form class="bootstrap-iso"  name="create-event-form" id="create-event-form">
           
-              <div class="container">
+              <div class="forms-container">
 
-              <div class="row">
-                <div class="accent-div-top col-12">Create an Event</div>
-              </div>
-
-              <!-- <div class="row">
-                <div class="login col-12"><input type="hidden" name="event[allDay]" id="create-all-day" value=false></div>
-              </div> -->
-
-              <div class="row">
-                <div class="login col-12"><input type="text" placeholder="Event Name" name="event[eventName]" id="create-event-name"></div>
-              </div>
-
-              <div class="row">
-                <div class="login col-12"><input type="text" placeholder="Notes" name="event[eventNotes]" id="create-event-notes"></div>
-              </div>
-
-              <div class="row">
-                <div class="login col-12"><input type="date" name="event[startDate]" id="create-start-date" min="2020-09-17" onkeydown="false"></div>
-              </div>
-
-              <div class="row">
-                <div class="login col-12">
-                  <input type="time" placeholder="password" name="event[startTime]" id="create-start-time">
-                  &nbsp;-&nbsp;
-                  <input type="time" placeholder="example.domain.com" name="event[endTime]" id="create-end-time">
+                <div class="row mb-4">
+                  <div class="col-12">Create an Event</div>
                 </div>
-              </div>
+
+                Event Name<span class="asteriskField">*</span>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><ion-icon name="add-circle"></ion-icon></span>
+                  </div>
+                  <input type="text" placeholder="Event Name" class="form-control" name="event[eventName]" id="create-event-name" required>
+                </div>
+
+                Notes<span class="asteriskField">*</span>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><ion-icon name="document-text"></ion-icon></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Notes" name="event[eventNotes]" id="create-event-notes">
+                </div>
+
+                
+
+                <!-- <div class="row">
+                  <div class="login col-12"><input type="text" placeholder="Event Name" name="event[eventName]" id="create-event-name"></div>
+                </div> -->
+
+                <!-- <div class="row">
+                  <div class="login col-12"><input type="text" placeholder="Notes" name="event[eventNotes]" id="create-event-notes"></div>
+                </div> -->
+
+                Date<span class="asteriskField">*</span>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><ion-icon name="calendar"></ion-icon></span>
+                  </div>
+                    <input class="form-control" type="date" name="event[startDate]" id="create-start-date" min="2020-09-17" onkeydown="false">
+                </div>
+
+                Time<span class="asteriskField">*</span>
+                <div class="input-group mb-4">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><ion-icon name="time"></ion-icon></span>
+                  </div>
+                    <input class="form-control" type="time" placeholder="password" name="event[startTime]" id="create-start-time">
+                    &nbsp;-&nbsp;
+                    <input class="form-control" type="time" placeholder="example.domain.com" name="event[endTime]" id="create-end-time">
+                </div>
+
+
+
+                <!-- <div class="row">
+                  <div class="login col-12">
+                    <input type="time" placeholder="password" name="event[startTime]" id="create-start-time">
+                    &nbsp;-&nbsp;
+                    <input type="time" placeholder="example.domain.com" name="event[endTime]" id="create-end-time">
+                  </div>
+                </div> -->
 
               
 
               <div class="row">
-                <div class="login col-12"><p id="create-event-result"></p></div>
+                <div class="col-12"><p id="create-event-result"></p></div>
               </div>
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="login col-12"><input type="submit" name="create-event-submit" value="Create Event"></div>
+              </div> -->
+
+              <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-custom" type="submit" name="create-event-submit" value="Create Event">Create Event</button>
+                </div>
               </div>
 
               <div class="row">
-                <div class="login col-12"></div>
+                <div class="col-12"></div>
               </div>
 
               <div class="row">
-                <div class="accent-div-bottom login col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+                <div class="col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
               </div>
 
             </div>
@@ -315,7 +394,7 @@
         <!-- BEGIN EVENT LIST SECTION -->
         <section id="show-event-secion">
           
-          <div class="container">
+          <div class="forms-container" id="show-events-section">
 
             <div class="row">
               <div class="col-12"><h4>User Events:</h4></div>
@@ -344,6 +423,9 @@
 
       </div>
 
+      <!-- this div is used for spacing!-->
+      <div class="col-12 col-lg-1"></div>
+
       
     </div>
 
@@ -352,7 +434,7 @@
   </div>
 
 
-
+<script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
 </body>
 
 

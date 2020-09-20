@@ -2,17 +2,14 @@
 
 const events = require('./events')
 
-// const today = new Date()
-// const currentMonth = today.getMonth() + 1
-// const currentYear = today.getFullYear()
+// defining variables for building the initial calendar
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const today = new Date()
+const currentMonth = months[today.getMonth()]
+const currentYear = today.getFullYear()
 
+// require the calendar file
 const calendar = require('./calendar')
-
-// use require with a reference to bundle the file and use it in this file
-// const example = require('./example')
-
-// use require without a reference to ensure a file is bundled
-// require('./example')
 
 $(() => {
   // create event listener for form submissions
@@ -25,6 +22,29 @@ $(() => {
   // create event
   $('#create-event-form').on('submit', events.onCreateEvent)
 
+  // Event listener to toggle the register and login function based on user request
+  // (cha, login, reg, small, tic)
+  // events.views(false, false, false, false, false, login)
+  $('#anchor-register-user').on('click', function () {
+    events.resetHTML()
+    events.resetForms()
+    events.views(false, false, true, false, false)
+  })
+
+  $('#anchor-login').on('click', function () {
+    events.resetHTML()
+    events.resetForms()
+    events.views(false, true, false, false, false)
+    $('#navigation').hide()
+  })
+
+  // Events listeners to toggle between game page and change password page
+  $('#btn-change-password').on('click', function () {
+    events.resetHTML()
+    events.resetForms()
+    events.views(true, false, false, false, false)
+  })
+
   // build and display the calendar on page load!
-  calendar.buildCalendar('September', 2020)
+  calendar.buildCalendar(currentMonth, currentYear)
 })

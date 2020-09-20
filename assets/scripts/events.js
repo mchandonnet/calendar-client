@@ -4,6 +4,49 @@ const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 
+const resetForms = function () {
+  $('#change-password-form').trigger('reset')
+  $('#login-form').trigger('reset')
+  $('#register-form').trigger('reset')
+  $('#create-event-form').trigger('reset')
+}
+
+const resetHTML = function () {
+  $('#registration-result').html('')
+  $('#login-result').html('')
+  $('#change-password-result').html('')
+  $('#api-failure').html('')
+}
+
+const views = function (cha, login, reg, events) {
+  if (cha) {
+    $('#change-password-form').show()
+  } else {
+    $('#change-password-form').hide()
+  }
+
+  if (login) {
+    $('#login-form').show()
+  } else {
+    $('#login-form').hide()
+  }
+
+  if (reg) {
+    $('#register-form').show()
+  } else {
+    $('#register-form').hide()
+  }
+
+  if (events) {
+    $('#small-games').show()
+  } else {
+    $('#small-games').hide()
+  }
+
+  resetForms()
+  $('#api-failure').html('')
+}
+
 // sign-in event handler
 const onSignIn = function (event) {
   // prevent default action for the event
@@ -70,5 +113,8 @@ module.exports = {
   onSignIn: onSignIn,
   onRegisterUser: onRegisterUser,
   onCreateEvent: onCreateEvent,
-  onChangePassword: onChangePassword
+  onChangePassword: onChangePassword,
+  views: views,
+  resetHTML: resetHTML,
+  resetForms: resetForms
 }

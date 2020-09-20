@@ -34,7 +34,6 @@ const getPrevMonth = function (month, year) {
   const currentMonth = months[currentDate.getMonth()]
   const prevMonth = (currentMonth === 'January') ? months[11] : months[currentDate.getMonth() - 1]
   const prevYear = (currentMonth === 'January') ? year - 1 : year
-  console.log(`buildCalendar(${prevMonth}, ${prevYear})`)
   return buildCalendar(prevMonth, prevYear)
 }
 
@@ -43,7 +42,6 @@ const getNextMonth = function (month, year) {
   const currentMonth = months[currentDate.getMonth()]
   const nextMonth = (currentMonth === 'December') ? months[0] : months[currentDate.getMonth() + 1]
   const nextYear = (currentMonth === 'December') ? year + 1 : year
-  console.log(`buildCalendar(${nextMonth}, ${nextYear})`)
   return buildCalendar(nextMonth, nextYear)
 }
 
@@ -96,7 +94,6 @@ const buildCalendar = function (month, year) {
   }
 
   $('#calendar-days').html(calHTML)
-  console.log(month + year)
 }
 
 module.exports = {
