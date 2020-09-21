@@ -3,49 +3,56 @@
 const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+const uiManager = require('./uiManager')
 
-const resetForms = function () {
-  $('#change-password-form').trigger('reset')
-  $('#login-form').trigger('reset')
-  $('#register-form').trigger('reset')
-  $('#create-event-form').trigger('reset')
-}
+// const resetForms = function () {
+//   $('#change-password-form').trigger('reset')
+//   $('#login-form').trigger('reset')
+//   $('#register-form').trigger('reset')
+//   $('#create-event-form').trigger('reset')
+// }
 
-const resetHTML = function () {
-  $('#registration-result').html('')
-  $('#login-result').html('')
-  $('#change-password-result').html('')
-  $('#api-failure').html('')
-}
+// const resetHTML = function () {
+//   $('#registration-result').html('')
+//   $('#login-result').html('')
+//   $('#change-password-result').html('')
+//   $('#api-failure').html('')
+// }
 
-const views = function (cha, login, reg, events) {
-  if (cha) {
-    $('#change-password-form').show()
-  } else {
-    $('#change-password-form').hide()
-  }
+// const views = function (changepw, login, register, createEvent, showEvents) {
+//   if (changepw) {
+//     $('#change-password-form').show()
+//   } else {
+//     $('#change-password-form').hide()
+//   }
 
-  if (login) {
-    $('#login-form').show()
-  } else {
-    $('#login-form').hide()
-  }
+//   if (login) {
+//     $('#login-form').show()
+//   } else {
+//     $('#login-form').hide()
+//   }
 
-  if (reg) {
-    $('#register-form').show()
-  } else {
-    $('#register-form').hide()
-  }
+//   if (register) {
+//     $('#register-form').show()
+//   } else {
+//     $('#register-form').hide()
+//   }
 
-  if (events) {
-    $('#small-games').show()
-  } else {
-    $('#small-games').hide()
-  }
+//   if (createEvent) {
+//     $('#create-event-form').show()
+//   } else {
+//     $('#create-event-form').hide()
+//   }
 
-  resetForms()
-  $('#api-failure').html('')
-}
+//   if (showEvents) {
+//     $('#show-events-section').show()
+//   } else {
+//     $('#show-events-section').hide()
+//   }
+
+//   uiManager.resetForms()
+//   $('#api-failure').html('')
+// }
 
 // sign-in event handler
 const onSignIn = function (event) {
@@ -109,12 +116,38 @@ const onCreateEvent = function (event) {
     .catch(ui.onCreateEventFailure)
 }
 
+const getUserEvents = function () {
+  uiManager.views(false, false, false, false, true)
+  api.apiCall('/events', 'GET', false, true)
+  // handle SUCCESSFUL response
+    .then(ui.onGetUserEventsSuccess)
+  // handle ERROR response
+    .catch(ui.onGetUserEventsFailure)
+}
+
+const deleteEvent = function (event) {
+  console.log('Delete this event', event.target.dataset.valueIndex)
+  const urlString = `/events/${event.target.dataset.valueIndex}`
+  api.apiCall(urlString, 'DELETE', 'false', 'true')
+  // handle SUCCESSFUL response
+    .then(() => getUserEvents())
+  // handle ERROR response
+    .catch(ui.onDeleteEventsFailure)
+}
+
+const editEvent = function (event) {
+  console.log('Edit this event', event.target.dataset.valueIndex)
+}
+
 module.exports = {
   onSignIn: onSignIn,
   onRegisterUser: onRegisterUser,
   onCreateEvent: onCreateEvent,
   onChangePassword: onChangePassword,
-  views: views,
-  resetHTML: resetHTML,
-  resetForms: resetForms
+  // views: views,
+  // resetHTML: resetHTML,
+  // resetForms: resetForms,
+  getUserEvents: getUserEvents,
+  deleteEvent: deleteEvent,
+  editEvent: editEvent
 }

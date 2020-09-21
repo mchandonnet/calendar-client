@@ -15,10 +15,59 @@ $nov-color: #bf1300;
 $dec-color: #1b53cc; 
 */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.bootstrap-iso form {
-  // font-family: Arial, Helvetica, sans-serif; 
-  color: black
+.body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*--------------------------------------------------------*/
+/* --- NAVIGATION SECTION --- */
+/*--------------------------------------------------------*/
+.navigation {
+  background-color: rgb(196, 112, 8);
+  position: absolute;
+  top: 0; 
+  width: 100vw;
+  word-spacing: 5px;
+  text-align: right;
+}
+
+.navigation li {
+  display: inline-block;
+  margin: 10px 30px 0 0;
+  list-style: none;
+  text-transform: lowercase;
+}
+
+.navigation li a:link,
+.navigation li a:visited {
+  padding-bottom: 5px;
+  font-size: 125%;
+  color: #ffffff;
+  text-decoration: none;
+  border-top: 3px solid  rgb(196, 112, 8);
+  border-bottom: 3px solid  rgb(196, 112, 8);
+  
+}
+
+.navigation li a:hover,
+.navigation li a:active {
+  border-top: 3px solid #ffffff;
+  transition: border-top 1s;
+}
+
+
+/*--------------------------------------------------------*/
+/* --- Forms --- */
+/*--------------------------------------------------------*/
+
+.bootstrap-iso form { 
+  color: #000000;
 }
 
 .bootstrap-iso form button, .bootstrap-iso form button:hover {
@@ -56,6 +105,10 @@ $dec-color: #1b53cc;
 //   display: none;
 // }
 
+#navigation {
+  display: none;
+}
+
 #change-password-form {
   display: none;
 }
@@ -65,6 +118,10 @@ $dec-color: #1b53cc;
 }
 
 #create-event-form {
+  display: none;
+}
+
+#edit-event-form {
   display: none;
 }
 
@@ -127,12 +184,23 @@ $dec-color: #1b53cc;
 
 .weekday-header {
   text-align: center;
-  background: #c47008;  
+  background: #c47008; 
+  text-transform: uppercase;
 }
 
 .weekday-footer {
   border: 0px;
   text-align: right;
+}
+
+.weekday-empty {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 50px;
+  margin: 2px;  
+  text-align: center;
+  font-size: 36px;
+  line-height: 50px;
 }
 
 .weekday {
@@ -144,11 +212,25 @@ $dec-color: #1b53cc;
   font-size: 36px;
   line-height: 50px;
 
+  &.today {
+    color: #c47008;
+  }
+
   &:hover {
     background-color: rgba(196, 112, 8, .25)
   }
 }
 
+.events{
+  
+  &.header {
+  margin: 10px 10px 30px 10px;
+  }
+
+  &.edit-delete {
+    margin-bottom: 40px;
+  }
+}
 
 #loadOverlay {
   display: none;

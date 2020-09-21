@@ -70,6 +70,12 @@ const buildCalendar = function (month, year) {
   // display the month and year at the top of the calendar
   $('#month-text').html(`${month}, ${year}`)
 
+  // get today's date so that we can try to highlight the date in the calendar...
+  const t = new Date()
+  const todayM = months[t.getMonth()]
+  const todayD = t.getDate()
+  const todayY = t.getFullYear()
+
   // Create the Rows of the TABLE.. a calendar can never have more than 6 rows (weeks)
   for (let i = 0; i <= 5; i++) {
     // create a table row
@@ -79,13 +85,17 @@ const buildCalendar = function (month, year) {
     for (let j = 0; j <= 6; j++) {
       // this creates the empty cells at the beginning of the month
       if (i === 0 && j < firstDay) {
-        calHTML += '<td class="weekday"></td>'
+        calHTML += '<td class="weekday-empty"></td>'
         // if the current date (counting from 0) is GT the number of days in the month... BREAK the LOOP
       } else if (date > daysInMonth) {
         break
       // otherwise, create a new table cell
       } else {
-        calHTML += `<td class="weekday">${date}</td>`
+        if (month === todayM && date === todayD && year === todayY) {
+          calHTML += `<td class="weekday today">${date}</td>`
+        } else {
+          calHTML += `<td class="weekday">${date}</td>`
+        }
         date++
       }
     }

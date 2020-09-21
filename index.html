@@ -14,6 +14,7 @@
   <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
   <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
 
+  <!-- used to make sure that hidden elements don't flash on the screen at initial page load -->
   <div id="loadOverlay" style="background-color:#ffffff; position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;"></div>
 </head>
 
@@ -22,6 +23,12 @@
       
 <body>
 
+  <div class="navigation" id="navigation">
+    <ul>
+      <li><a href="#">logout</a></li>
+      <li><a href="#" id="anchor-change-pw-form">change password</a></li>
+    </ul>
+  </div>
 
   <div class="outer-container">
 
@@ -64,7 +71,7 @@
         
               <tfoot>
                 <tr>
-                  <th colspan="7" class="weekday-footer">Create a new event</th>
+                  <th colspan="7" class="weekday-footer" id="btn-create-event-"><a href="#" id="anchor-show-events">Show User Events</a></th>
                 </tr>
               </tfoot>
 
@@ -75,8 +82,6 @@
 
         </section>
         <!-- END CALENDAR SECTION -->
-
-
       
       </div>
 
@@ -280,7 +285,7 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+                <div class="col-12"><a href="#" id="anchor-register-user"><a href="#" id="anchor-event-list">Return to events list</a></a></div>
               </div>
 
             </div>
@@ -298,75 +303,50 @@
         <section id="create-event-secion">
           <form class="bootstrap-iso"  name="create-event-form" id="create-event-form">
           
-              <div class="forms-container">
+            <div class="forms-container">
 
-                <div class="row mb-4">
-                  <div class="col-12">Create an Event</div>
+              <div class="row mb-4">
+                <div class="col-12">Create an Event</div>
+              </div>
+
+              Event Name<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="add-circle"></ion-icon></span>
                 </div>
+                <input type="text" placeholder="Event Name" class="form-control" name="event[eventName]" id="create-event-name" required>
+              </div>
 
-                Event Name<span class="asteriskField">*</span>
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><ion-icon name="add-circle"></ion-icon></span>
-                  </div>
-                  <input type="text" placeholder="Event Name" class="form-control" name="event[eventName]" id="create-event-name" required>
+              Notes<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="document-text"></ion-icon></span>
                 </div>
+                <input type="text" class="form-control" placeholder="Notes" name="event[eventNotes]" id="create-event-notes">
+              </div>
 
-                Notes<span class="asteriskField">*</span>
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><ion-icon name="document-text"></ion-icon></span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Notes" name="event[eventNotes]" id="create-event-notes">
+
+              Date<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="calendar"></ion-icon></span>
                 </div>
+                  <input class="form-control" type="date" name="event[startDate]" id="create-start-date" min="2020-09-17" onkeydown="false">
+              </div>
 
-                
-
-                <!-- <div class="row">
-                  <div class="login col-12"><input type="text" placeholder="Event Name" name="event[eventName]" id="create-event-name"></div>
-                </div> -->
-
-                <!-- <div class="row">
-                  <div class="login col-12"><input type="text" placeholder="Notes" name="event[eventNotes]" id="create-event-notes"></div>
-                </div> -->
-
-                Date<span class="asteriskField">*</span>
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><ion-icon name="calendar"></ion-icon></span>
-                  </div>
-                    <input class="form-control" type="date" name="event[startDate]" id="create-start-date" min="2020-09-17" onkeydown="false">
+              Time<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="time"></ion-icon></span>
                 </div>
-
-                Time<span class="asteriskField">*</span>
-                <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><ion-icon name="time"></ion-icon></span>
-                  </div>
-                    <input class="form-control" type="time" placeholder="password" name="event[startTime]" id="create-start-time">
-                    &nbsp;-&nbsp;
-                    <input class="form-control" type="time" placeholder="example.domain.com" name="event[endTime]" id="create-end-time">
-                </div>
-
-
-
-                <!-- <div class="row">
-                  <div class="login col-12">
-                    <input type="time" placeholder="password" name="event[startTime]" id="create-start-time">
-                    &nbsp;-&nbsp;
-                    <input type="time" placeholder="example.domain.com" name="event[endTime]" id="create-end-time">
-                  </div>
-                </div> -->
-
-              
+                  <input class="form-control" type="time" name="event[startTime]" id="create-start-time">
+                  &nbsp;-&nbsp;
+                  <input class="form-control" type="time" name="event[endTime]" id="create-end-time">
+              </div>
 
               <div class="row">
                 <div class="col-12"><p id="create-event-result"></p></div>
               </div>
-
-              <!-- <div class="row">
-                <div class="login col-12"><input type="submit" name="create-event-submit" value="Create Event"></div>
-              </div> -->
 
               <div class="row">
                 <div class="col-12">
@@ -379,7 +359,7 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+                <div class="col-12"><a href="#" id="anchor-event-list">Return to events list</a></div>
               </div>
 
             </div>
@@ -390,34 +370,99 @@
 
 
 
+        <!-- BEGIN EVENT EDIT FORM SECTION -->
+        <section id="create-event-secion">
+          <form class="bootstrap-iso"  name="edit-event-form" id="edit-event-form">
+          
+            <div class="forms-container">
+
+              <div class="row mb-4">
+                <div class="col-12">Edit an Event</div>
+              </div>
+
+              Event Name<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="add-circle"></ion-icon></span>
+                </div>
+                <input type="text" placeholder="Event Name" class="form-control" name="event[eventName]" id="edit-event-name" required>
+              </div>
+
+              Notes<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="document-text"></ion-icon></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Notes" name="event[eventNotes]" id="edit-event-notes">
+              </div>
+
+
+              Date<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="calendar"></ion-icon></span>
+                </div>
+                  <input class="form-control" type="date" name="event[startDate]" id="edit-start-date" min="2020-09-17" onkeydown="false">
+              </div>
+
+              Time<span class="asteriskField">*</span>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="time"></ion-icon></span>
+                </div>
+                  <input class="form-control" type="time" name="event[startTime]" id="edit-start-time">
+                  &nbsp;-&nbsp;
+                  <input class="form-control" type="time" name="event[endTime]" id="edit-end-time">
+              </div>
+
+              <div class="row">
+                <div class="col-12"><p id="edit-event-result"></p></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-custom" type="submit" name="edit-event-submit" value="Create Event">Update Event</button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12"><a href="#" id="anchor-event-list">Return to events list</a></div>
+              </div>
+
+            </div>
+
+          </form>
+        </section>
+        <!-- END EVENT EDIT FORM SECTION -->
+
+
+
 
         <!-- BEGIN EVENT LIST SECTION -->
         <section id="show-event-secion">
           
           <div class="forms-container" id="show-events-section">
 
-            <div class="row">
-              <div class="col-12"><h4>User Events:</h4></div>
+            <div class="col-12" id>
+              <a href="#" id="btn-create-event">Create a new event</a>
             </div>
 
             <div class="row">
-              <div class="col-12" id="noEvents"></div>            
+              <div class="col-12 events header"><h4 id="event-owner"></h4></div>
             </div>
 
             <div class="row">
-              <div class="col-12"><h6>Event Name</h6></div>            
-            </div>
-            <div class="row">
-              <div class="col-12">event notes</div>            
-            </div>
-            <div class="row">
-              <div class="col-12">start:time - end:time</div>            
-            </div>
+              <div class="col-12" id="user-events">
 
-
+              </div>            
+            </div>
 
         </section>
-        <!-- BEGIN EVENT LIST SECTION -->
+        <!-- END EVENT LIST SECTION -->
 
 
 
