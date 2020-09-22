@@ -70,7 +70,7 @@ const views = function (changepw, login, register, createEvent, showEvents, edit
     $('#navigation').hide()
   }
 
-  resetForms()
+  // resetForms()
   $('#api-failure').html('')
 }
 

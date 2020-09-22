@@ -145,7 +145,8 @@ const onDeleteEventFailure = function () {
 }
 
 const onEditEventGetDetailsSuccess = function (res) {
-  uiManager.resetForms()
+  console.log('res: ', res)
+  // uiManager.resetForms()
   $('#edit-event-name').val(res.event.eventName)
   $('#event-id').val(res.event._id)
   $('#edit-event-notes').val(res.event.eventNotes)
@@ -175,7 +176,6 @@ module.exports = {
   onCreateEventFailure: onCreateEventFailure,
   onGetUserEventsSuccess: onGetUserEventsSuccess,
   onGetUserEventsFailure: onGetUserEventsFailure,
-  // clearForms: clearForms,
   onChangePasswordFailure: onChangePasswordFailure,
   onChangePasswordSuccess: onChangePasswordSuccess,
   onDeleteEventFailure: onDeleteEventFailure,
