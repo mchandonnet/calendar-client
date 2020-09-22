@@ -110,7 +110,7 @@ const formatTime = function (string) {
 
 // getUserEvents Success
 const onGetUserEventsSuccess = function (res) {
-  $('#event-owner').html(`<p>${store.user.firstName}  ${store.user.lastName}'s Events: <br>${store.user.LDC}</p>`)
+  $('#event-owner').html(`<p>${store.user.firstName}  ${store.user.lastName}'s Events</p>`)
   let eventsHTML = ''
   if (res.event.length === 0) {
     eventsHTML += '<div class="col-12">You do not have any events scheduled currently!</div>'
@@ -122,6 +122,7 @@ const onGetUserEventsSuccess = function (res) {
       eventsHTML += `
         <div class="col-12 events eventName"><h6>${res.event[i].eventName}</h6></div>
         <div class="col-12 events">${res.event[i].eventNotes}</div>
+        <div class="col-12 events">${res.event[i].startDate}</div>
         <div class="col-12 events">${startTime} - ${endTime}</div>
         <div class="col-12 events edit-delete">
         <span><a href="#" id="event-edit" data-value-index="${res.event[i]._id}">edit</a></span>
