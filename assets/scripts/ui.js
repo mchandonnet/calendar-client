@@ -1,24 +1,16 @@
 'use strict'
 
-// const events = require('./events')
 const uiManager = require('./uiManager')
 const store = require('./store')
-// const calendar = require('./calendar')
+const calendar = require('./calendar')
 
-// clear forms
-// const clearForms = function () {
-//   $('#register-form').trigger('reset')
-//   $('#login-form').trigger('reset')
-//   $('#create-event-form').trigger('reset')
-//   resetHTML()
-// }
-
-// const resetHTML = function () {
-//   $('#registration-result').html('')
-//   $('#login-result').html('')
-//   $('#change-password-result').html('')
-//   $('#api-failure').html('')
-// }
+// defining variables for building the initial calendar
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const today = new Date()
+const currentMonth = months[today.getMonth()]
+const currentYear = today.getFullYear()
+const currentM = ((today.getMonth()) + 1) <= 9 ? `0${((today.getMonth()) + 1)}` : ((today.getMonth()) + 1)
+const currentD = today.getDate() <= 9 ? `0${today.getDate()}` : today.getDate()
 
 // succesfull registrations
 const onRegisterSuccess = function (res) {
@@ -43,35 +35,50 @@ const onRegisterFailure = function () {
 // Succesfull User Logins
 const onLoginSuccess = function (res) {
   // reset forms
-  // clearForms()
-  uiManager.resetForms()
-  uiManager.resetHTML()
+  uiManager.resetForms(true)
   store.user = res.user
-  $('#login-result').html('')
-  $('#login-form').hide()
+  store.user.today = `${currentYear}-${currentM}-${currentD}`
+  uiManager.views(false, false, false, false, false, false, true, true)
+  calendar.buildCalendar(currentMonth, currentYear)
 }
 
 // Failed User Logins
 const onLoginFailure = function () {
   $('#login-result').html('Login failed - check your email address and password, and try again!')
+  $('#login-password').val('')
+}
+
+// logout Success
+const onLogoutSuccess = function () {
+  uiManager.resetForms(true)
+  uiManager.views(false, true, false, false, false, false, false, false)
+  delete store.user
+  calendar.buildCalendar(currentMonth, currentYear)
+}
+
+// logout failure
+const onLogoutFailure = function () {
+  $('#logout-result').html('User logout failed - please try again! -- ')
 }
 
 // change password success
 const onChangePasswordSuccess = function () {
   $('#change-password-result').html('You have succesfully changed your password!')
-  // clearForms()
-  uiManager.resetForms()
+  uiManager.resetForms(false)
 }
 
 // change password failure
 const onChangePasswordFailure = function () {
   $('#change-password-result').html('Change Password failed - check your password, and try again!')
+  $('#change-password-old').val('')
+  $('#change-password-new').val('')
+  $('#change-password-form').on('click', function () {
+    $('#change-password-result').html('')
+  })
 }
 
 // successfully create event
 const onCreateEventSuccess = function (res) {
-  // reset forms
-  // clearForms()
   uiManager.resetForms()
   // show a confirmation message
   $('#create-event-result').html('Event Created!')
@@ -79,32 +86,42 @@ const onCreateEventSuccess = function (res) {
 
 // fail to create event
 const onCreateEventFailure = function () {
-  $('#create-event-result').html('Create Event Failed - something went wrong with your request, please try again!')
+  $('#create-event-result').html('Action Failed - Please try again in a few minutes!')
+  $('#create-event-form').on('click', function () {
+    $('#create-event-result').html('')
+  })
 }
 
+// function to convert time from 24 hour clock to 12 hour clock
 const formatTime = function (string) {
   const t = string.split(':')
-  const h = (t[0] % 12) === 0 ? `0${t}` : (t[0] % 12)
-  const m = t[1]
-  const d = (t[0] % 12) === 0 ? 'am' : 'pm'
-  return `${h}:${m} ${d}`
+  if (t[0] === '00') {
+    const h = 12
+    const m = t[1]
+    const d = 'am'
+    return `${h}:${m} ${d}`
+  } else {
+    const h = (t[0] % 12) === 0 ? `0${t}` : (t[0] % 12)
+    const m = t[1]
+    const d = (t[0] < 12) ? 'am' : 'pm'
+    return `${h}:${m} ${d}`
+  }
 }
 
 // getUserEvents Success
 const onGetUserEventsSuccess = function (res) {
-  $('#event-owner').html(`${res.event[0].owner.firstName} ${res.event[0].owner.lastName}'s events:`)
+  $('#event-owner').html(`<p>${store.user.firstName}  ${store.user.lastName}'s Events: <br>${store.user.LDC}</p>`)
   let eventsHTML = ''
   if (res.event.length === 0) {
     eventsHTML += '<div class="col-12">You do not have any events scheduled currently!</div>'
   } else {
     for (let i = 0; i < res.event.length; i++) {
-      const date = new Date(res.event[i].startDate)
+      // const date = new Date(res.event[i].startDate)
       const startTime = formatTime(res.event[i].startTime)
       const endTime = formatTime(res.event[i].endTime)
       eventsHTML += `
         <div class="col-12 events eventName"><h6>${res.event[i].eventName}</h6></div>
         <div class="col-12 events">${res.event[i].eventNotes}</div>
-        <div class="col-12 events">${date.toDateString()}</div>
         <div class="col-12 events">${startTime} - ${endTime}</div>
         <div class="col-12 events edit-delete">
         <span><a href="#" id="event-edit" data-value-index="${res.event[i]._id}">edit</a></span>
@@ -118,12 +135,32 @@ const onGetUserEventsSuccess = function (res) {
 }
 
 // getUserEvents Failure
-const onGetUserEventsFailure = function () {
-  console.log('Failed to get users events')
+const onGetUserEventsFailure = function (err) {
+  console.log('Failed to get users events', err)
 }
 
 const onDeleteEventFailure = function () {
-  console.log('Delete Failed')
+  $('#display-events-result').html('Action Failed - Please try again in a few minutes!')
+}
+
+const onEditEventGetDetailsSuccess = function (res) {
+  uiManager.resetForms()
+  $('#edit-event-name').val(res.event.eventName)
+  $('#event-id').val(res.event._id)
+  $('#edit-event-notes').val(res.event.eventNotes)
+  $('#edit-start-date').val(res.event.startDate)
+  $('#edit-start-time').val(res.event.startTime)
+  $('#edit-end-time').val(res.event.endTime)
+  uiManager.views(false, false, false, false, false, true, true, true)
+}
+
+const onEditEventGetDetailsFailure = function () {
+  uiManager.resetForms()
+  $('#display-events-result').html('Action Failed - Please try again in a few minutes!')
+}
+
+const onEditEventFailure = function () {
+  $('#edit-event-result').html('Action Failed - Please try again in a few minutes!')
 }
 
 module.exports = {
@@ -131,6 +168,8 @@ module.exports = {
   onLoginFailure: onLoginFailure,
   onRegisterSuccess: onRegisterSuccess,
   onRegisterFailure: onRegisterFailure,
+  onLogoutSuccess: onLogoutSuccess,
+  onLogoutFailure: onLogoutFailure,
   onCreateEventSuccess: onCreateEventSuccess,
   onCreateEventFailure: onCreateEventFailure,
   onGetUserEventsSuccess: onGetUserEventsSuccess,
@@ -138,5 +177,8 @@ module.exports = {
   // clearForms: clearForms,
   onChangePasswordFailure: onChangePasswordFailure,
   onChangePasswordSuccess: onChangePasswordSuccess,
-  onDeleteEventFailure: onDeleteEventFailure
+  onDeleteEventFailure: onDeleteEventFailure,
+  onEditEventGetDetailsSuccess: onEditEventGetDetailsSuccess,
+  onEditEventGetDetailsFailure: onEditEventGetDetailsFailure,
+  onEditEventFailure: onEditEventFailure
 }

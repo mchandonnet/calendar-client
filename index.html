@@ -22,13 +22,15 @@
 
       
 <body>
-
+  <!-- BEGIN NAV section -->
   <div class="navigation" id="navigation">
     <ul>
-      <li><a href="#">logout</a></li>
+      <li id="logout-result"></li>
+      <li><a href="#" id="anchor-logout">logout</a></li>
       <li><a href="#" id="anchor-change-pw-form">change password</a></li>
     </ul>
   </div>
+  <!-- END NAV section -->
 
   <div class="outer-container">
 
@@ -71,7 +73,7 @@
         
               <tfoot>
                 <tr>
-                  <th colspan="7" class="weekday-footer" id="btn-create-event-"><a href="#" id="anchor-show-events">Show User Events</a></th>
+                  <th colspan="7" class="weekday-footer" id="weekday-footer"><a href="#" id="anchor-show-events">Show All User Events</a></th>
                 </tr>
               </tfoot>
 
@@ -170,7 +172,6 @@
 
 
 
-
         <!-- BEGIN LOGIN FORM SECTION -->
         <section id="login-secion">
           <form class="bootstrap-iso"  name="login-form" id="login-form">
@@ -233,7 +234,6 @@
 
 
 
-
         <!-- BEGIN CHANGE PASSWORD FORM SECTION -->
         <section id="change password-secion">
           <form class="bootstrap-iso"  name="change-password-form" id="change-password-form">
@@ -270,7 +270,7 @@
 
               <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-custom" type="submit" name="change-password-submit" value="Change Password">Change Password</button>
+                    <button class="btn btn-custom" type="submit" name="change-password-submit" id="change-password-submit" value="Change Password">Change Password</button>
                 </div>
               </div>
 
@@ -285,17 +285,14 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><a href="#" id="anchor-register-user"><a href="#" id="anchor-event-list">Return to events list</a></a></div>
+                <div class="col-12"><a href="#" id="anchor-register-user"><a href="#" class="anchor-event-list">Return to events list</a></a></div>
               </div>
 
             </div>
 
           </form>
         </section>
-        <!-- END LOGIN FORM SECTION -->
-
-
-
+        <!-- END CHANGE PASSWORD FORM SECTION -->
 
 
 
@@ -331,7 +328,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><ion-icon name="calendar"></ion-icon></span>
                 </div>
-                  <input class="form-control" type="date" name="event[startDate]" id="create-start-date" min="2020-09-17" onkeydown="false">
+                  <input class="form-control" type="date" name="event[startDate]" id="create-start-date" value="" min="2020-09-17">
               </div>
 
               Time<span class="asteriskField">*</span>
@@ -359,7 +356,7 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><a href="#" id="anchor-event-list">Return to events list</a></div>
+                <div class="col-12"><a href="#" class="anchor-event-list">Return to events list</a></div>
               </div>
 
             </div>
@@ -371,7 +368,7 @@
 
 
         <!-- BEGIN EVENT EDIT FORM SECTION -->
-        <section id="create-event-secion">
+        <section id="edit-event-secion">
           <form class="bootstrap-iso"  name="edit-event-form" id="edit-event-form">
           
             <div class="forms-container">
@@ -386,6 +383,7 @@
                   <span class="input-group-text"><ion-icon name="add-circle"></ion-icon></span>
                 </div>
                 <input type="text" placeholder="Event Name" class="form-control" name="event[eventName]" id="edit-event-name" required>
+                <input type="hidden" name="ID" id="event-id" value="" required>
               </div>
 
               Notes<span class="asteriskField">*</span>
@@ -430,7 +428,7 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><a href="#" id="anchor-event-list">Return to events list</a></div>
+                <div class="col-12"><a href="#" class="anchor-event-list">Return to events list</a></div>
               </div>
 
             </div>
@@ -445,6 +443,10 @@
         <!-- BEGIN EVENT LIST SECTION -->
         <section id="show-event-secion">
           
+          <div class="col-12">
+            <div class="col-12" id="display-events-result"></div>
+          </div>
+
           <div class="forms-container" id="show-events-section">
 
             <div class="col-12" id>

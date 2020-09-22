@@ -2,57 +2,9 @@
 
 const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
+const store = require('./store')
 const ui = require('./ui')
 const uiManager = require('./uiManager')
-
-// const resetForms = function () {
-//   $('#change-password-form').trigger('reset')
-//   $('#login-form').trigger('reset')
-//   $('#register-form').trigger('reset')
-//   $('#create-event-form').trigger('reset')
-// }
-
-// const resetHTML = function () {
-//   $('#registration-result').html('')
-//   $('#login-result').html('')
-//   $('#change-password-result').html('')
-//   $('#api-failure').html('')
-// }
-
-// const views = function (changepw, login, register, createEvent, showEvents) {
-//   if (changepw) {
-//     $('#change-password-form').show()
-//   } else {
-//     $('#change-password-form').hide()
-//   }
-
-//   if (login) {
-//     $('#login-form').show()
-//   } else {
-//     $('#login-form').hide()
-//   }
-
-//   if (register) {
-//     $('#register-form').show()
-//   } else {
-//     $('#register-form').hide()
-//   }
-
-//   if (createEvent) {
-//     $('#create-event-form').show()
-//   } else {
-//     $('#create-event-form').hide()
-//   }
-
-//   if (showEvents) {
-//     $('#show-events-section').show()
-//   } else {
-//     $('#show-events-section').hide()
-//   }
-
-//   uiManager.resetForms()
-//   $('#api-failure').html('')
-// }
 
 // sign-in event handler
 const onSignIn = function (event) {
@@ -67,6 +19,16 @@ const onSignIn = function (event) {
     .then(ui.onLoginSuccess)
   // handle ERROR response
     .catch(ui.onLoginFailure)
+}
+
+// sign-out event handler
+const onLogout = function () {
+  // api.signUp(data)
+  api.apiCall('/sign-out', 'DELETE', false, true)
+  // handle SUCCESSFUL response
+    .then(ui.onLogoutSuccess)
+  // handle ERROR response
+    .catch(ui.onLogouFailure)
 }
 
 // registration event handler
@@ -116,9 +78,13 @@ const onCreateEvent = function (event) {
     .catch(ui.onCreateEventFailure)
 }
 
-const getUserEvents = function () {
-  uiManager.views(false, false, false, false, true)
-  api.apiCall('/events', 'GET', false, true)
+const getUserEvents = function (eventdate) {
+  store.user.LDC = eventdate
+  console.log('LDC: ',store.user.LDC)
+  uiManager.views(false, false, false, false, true, false, true, true)
+  const urlString = (eventdate === 'all') ? '/events' : '/events/date/' + eventdate
+  console.log(urlString)
+  api.apiCall(urlString, 'GET', false, true)
   // handle SUCCESSFUL response
     .then(ui.onGetUserEventsSuccess)
   // handle ERROR response
@@ -126,17 +92,41 @@ const getUserEvents = function () {
 }
 
 const deleteEvent = function (event) {
-  console.log('Delete this event', event.target.dataset.valueIndex)
   const urlString = `/events/${event.target.dataset.valueIndex}`
   api.apiCall(urlString, 'DELETE', 'false', 'true')
   // handle SUCCESSFUL response
-    .then(() => getUserEvents())
+    .then(() => getUserEvents(store.user.LDC))
   // handle ERROR response
     .catch(ui.onDeleteEventsFailure)
 }
 
-const editEvent = function (event) {
-  console.log('Edit this event', event.target.dataset.valueIndex)
+const editEventGetDetails = function (event) {
+  const urlString = `/events/${event.target.dataset.valueIndex}`
+  api.apiCall(urlString, 'GET', 'false', 'true')
+  // handle SUCCESSFUL response
+    .then(ui.onEditEventGetDetailsSuccess)
+  // handle ERROR response
+    .catch(ui.onEditEventGetDetailsFailure)
+}
+
+const onEditEvent = function (event) {
+  // prevent the default action for the event
+  event.preventDefault()
+  // get the form from the event object
+  const form = event.target
+  // use getFormFields() to get the data from the form
+  const data = getFormFields(form)
+  const urlString = `/events/${data.ID}`
+  api.apiCall(urlString, 'PATCH', data, true)
+  // handle SUCCESSFUL response
+    .then(() => {
+      $('#edit-event-result').html('Saving changes...')
+    })
+    .then(setTimeout(function () { 
+      getUserEvents(store.user.LDC)
+    }, 1000))
+  // handle ERROR response
+    .catch(ui.onEditEventFailure)
 }
 
 module.exports = {
@@ -149,5 +139,7 @@ module.exports = {
   // resetForms: resetForms,
   getUserEvents: getUserEvents,
   deleteEvent: deleteEvent,
-  editEvent: editEvent
+  editEventGetDetails: editEventGetDetails,
+  onEditEvent: onEditEvent,
+  onLogout: onLogout
 }

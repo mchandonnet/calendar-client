@@ -1,24 +1,24 @@
 @import '~bootstrap/scss/bootstrap';
 
-/* 
-$jan-color: #4287f5;
-$feb-color: #7dd3f5;
-$mar-color: #99db7f;
-$apr-color: #55b82e;
-$may-color: #f09cb2;
-$jun-color: #bd516d;
-$jul-color: #db1649;
-$aug-color: #CB5D15;
-$sep-color: #c47008;
-$oct-color: #ebc20e;
-$nov-color: #bf1300;
-$dec-color: #1b53cc; 
-*/
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  & a:link,
+  & a:visited {
+      font-size: 15px;
+      color: #c47008;
+      text-decoration: none;
+      line-height: 40px;
+  }
+
+  & a:hover,
+  & a:active {
+    text-decoration: none;
+    color: #c47008;
+  }
+
 }
 
 .body {
@@ -129,6 +129,10 @@ $dec-color: #1b53cc;
   display: none;
 }
 
+#weekday-footer {
+  display: none;
+}
+
 
 
 .body {
@@ -204,8 +208,7 @@ $dec-color: #1b53cc;
 }
 
 .weekday {
-  border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 20px;
   height: 50px;
   margin: 2px;  
   text-align: center;
@@ -216,6 +219,10 @@ $dec-color: #1b53cc;
     color: #c47008;
   }
 
+  &.selected {
+    background-color: rgba(196, 112, 8, .25)
+  }
+
   &:hover {
     background-color: rgba(196, 112, 8, .25)
   }
@@ -224,7 +231,7 @@ $dec-color: #1b53cc;
 .events{
   
   &.header {
-  margin: 10px 10px 30px 10px;
+  margin: 10px 10px 10px 10px;
   }
 
   &.edit-delete {

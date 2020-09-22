@@ -1,5 +1,7 @@
 'use strict'
 
+const store = require('./store')
+
 // get the first day of the month, and the day that it occurs on
 const months = [
   'January',
@@ -83,6 +85,9 @@ const buildCalendar = function (month, year) {
     // now we need to create the cells of the table...
     // each row can have a max of 7 columns
     for (let j = 0; j <= 6; j++) {
+      let clickMonth = months.indexOf(month) + 1
+      clickMonth = (clickMonth <= 9) ? `0${clickMonth}` : clickMonth
+      const clickDate = (date <= 9) ? `0${date}` : date
       // this creates the empty cells at the beginning of the month
       if (i === 0 && j < firstDay) {
         calHTML += '<td class="weekday-empty"></td>'
@@ -91,12 +96,23 @@ const buildCalendar = function (month, year) {
         break
       // otherwise, create a new table cell
       } else {
-        if (month === todayM && date === todayD && year === todayY) {
-          calHTML += `<td class="weekday today">${date}</td>`
+        if (store.user) {
+          if (month === todayM && date === todayD && year === todayY) {
+            calHTML += `
+            <td class="weekday today" id="selectDate" data-value-index="${year}-${clickMonth}-${date}">${date}</td>`
+          } else {
+            calHTML += `<td class="weekday" id="selectDate" data-value-index="${year}-${clickMonth}-${clickDate}">${date}</td>`
+          }
+          date++
         } else {
-          calHTML += `<td class="weekday">${date}</td>`
+          if (month === todayM && date === todayD && year === todayY) {
+            calHTML += `
+            <td class="weekday today">${date}</td>`
+          } else {
+            calHTML += `<td class="weekday">${date}</td>`
+          }
+          date++
         }
-        date++
       }
     }
 

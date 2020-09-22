@@ -16,7 +16,6 @@ const apiCall = function (url, method, data, auth) {
   if (data) {
     ajaxCall.data = data
   }
-  console.log('api has been called: ', ajaxCall)
   return $.ajax(ajaxCall)
 }
 
