@@ -74,21 +74,6 @@ const views = function (changepw, login, register, createEvent, showEvents, edit
   $('#api-failure').html('')
 }
 
-// clear forms
-// const clearForms = function () {
-//   $('#register-form').trigger('reset')
-//   $('#login-form').trigger('reset')
-//   $('#create-event-form').trigger('reset')
-//   resetHTML()
-// }
-
-// const resetHTML = function () {
-//   $('#registration-result').html('')
-//   $('#login-result').html('')
-//   $('#change-password-result').html('')
-//   $('#api-failure').html('')
-// }
-
 module.exports = {
   resetForms: resetForms,
   resetHTML: resetHTML,
