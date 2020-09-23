@@ -127,6 +127,7 @@ const onEditEvent = function (event) {
       $('#edit-event-result').html('Saving changes...')
     })
     .then(setTimeout(function () { 
+      uiManager.resetForms(true)
       ui.getUserEvents(store.user.LDC)
     }, 1000))
   // handle ERROR response
