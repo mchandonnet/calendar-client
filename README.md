@@ -3,7 +3,7 @@ M. Chandonnet // GA - SEI // Project #2 // Calendar Client
 
 # Calendar
 
-A basic User Calendar
+A basic User Calendar ( [Click HERE for API](https://github.com/mchandonnet/calendar_api) )
 1. If Required, register a new user
 2. Login to the Calendar
 3. Add Events by selecting a date from the calendar and using the "Create Event" link
