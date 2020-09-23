@@ -74,28 +74,32 @@ const onCreateEvent = function (event) {
   api.apiCall('/events', 'POST', data, true)
   // handle SUCCESSFUL response
     .then(ui.onCreateEventSuccess)
+    .then(setTimeout(function () {
+      ui.getUserEvents(store.user.LDC)
+      uiManager.resetForms()
+    }, 1000))
   // handle ERROR response
     .catch(ui.onCreateEventFailure)
 }
 
-const getUserEvents = function (eventdate) {
-  store.user.LDC = eventdate
-  console.log('LDC: ',store.user.LDC)
-  uiManager.views(false, false, false, false, true, false, true, true)
-  const urlString = (eventdate === 'all') ? '/events' : '/events/date/' + eventdate
-  console.log(urlString)
-  api.apiCall(urlString, 'GET', false, true)
-  // handle SUCCESSFUL response
-    .then(ui.onGetUserEventsSuccess)
-  // handle ERROR response
-    .catch(ui.onGetUserEventsFailure)
-}
+// const getUserEvents = function (eventdate) {
+//   store.user.LDC = eventdate
+//   console.log('LDC: ', store.user.LDC)
+//   uiManager.views(false, false, false, false, true, false, true, true)
+//   const urlString = (eventdate === 'all') ? '/events' : '/events/date/' + eventdate
+//   console.log(urlString)
+//   api.apiCall(urlString, 'GET', false, true)
+//   // handle SUCCESSFUL response
+//     .then(ui.onGetUserEventsSuccess)
+//   // handle ERROR response
+//     .catch(ui.onGetUserEventsFailure)
+// }
 
 const deleteEvent = function (event) {
   const urlString = `/events/${event.target.dataset.valueIndex}`
   api.apiCall(urlString, 'DELETE', 'false', 'true')
   // handle SUCCESSFUL response
-    .then(() => getUserEvents(store.user.LDC))
+    .then(() => ui.getUserEvents(store.user.LDC))
   // handle ERROR response
     .catch(ui.onDeleteEventsFailure)
 }
@@ -123,7 +127,7 @@ const onEditEvent = function (event) {
       $('#edit-event-result').html('Saving changes...')
     })
     .then(setTimeout(function () { 
-      getUserEvents(store.user.LDC)
+      ui.getUserEvents(store.user.LDC)
     }, 1000))
   // handle ERROR response
     .catch(ui.onEditEventFailure)
@@ -134,10 +138,7 @@ module.exports = {
   onRegisterUser: onRegisterUser,
   onCreateEvent: onCreateEvent,
   onChangePassword: onChangePassword,
-  // views: views,
-  // resetHTML: resetHTML,
-  // resetForms: resetForms,
-  getUserEvents: getUserEvents,
+  // getUserEvents: getUserEvents,
   deleteEvent: deleteEvent,
   editEventGetDetails: editEventGetDetails,
   onEditEvent: onEditEvent,

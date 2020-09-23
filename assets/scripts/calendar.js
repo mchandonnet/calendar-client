@@ -1,5 +1,6 @@
 'use strict'
 
+const events = require('./events')
 const store = require('./store')
 
 // get the first day of the month, and the day that it occurs on

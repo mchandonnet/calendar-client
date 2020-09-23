@@ -3,6 +3,7 @@
 const uiManager = require('./uiManager')
 const store = require('./store')
 const calendar = require('./calendar')
+const api = require('./api')
 
 // defining variables for building the initial calendar
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -38,8 +39,10 @@ const onLoginSuccess = function (res) {
   uiManager.resetForms(true)
   store.user = res.user
   store.user.today = `${currentYear}-${currentM}-${currentD}`
-  uiManager.views(false, false, false, false, false, false, true, true)
+  store.user.LDC = `${currentYear}-${currentM}-${currentD}`
+  uiManager.views(false, false, false, false, true, false, true, true)
   calendar.buildCalendar(currentMonth, currentYear)
+  getUserEvents(store.user.LDC)
 }
 
 // Failed User Logins
@@ -79,9 +82,7 @@ const onChangePasswordFailure = function () {
 
 // successfully create event
 const onCreateEventSuccess = function (res) {
-  uiManager.resetForms()
-  // show a confirmation message
-  $('#create-event-result').html('Event Created!')
+  $('#create-event-result').html('Creating event...')
 }
 
 // fail to create event
@@ -106,6 +107,17 @@ const formatTime = function (string) {
     const d = (t[0] < 12) ? 'am' : 'pm'
     return `${h}:${m} ${d}`
   }
+}
+
+const getUserEvents = function (eventdate) {
+  store.user.LDC = eventdate
+  uiManager.views(false, false, false, false, true, false, true, true)
+  const urlString = (eventdate === 'all') ? '/events' : '/events/date/' + eventdate
+  api.apiCall(urlString, 'GET', false, true)
+  // handle SUCCESSFUL response
+    .then(onGetUserEventsSuccess)
+  // handle ERROR response
+    .catch(onGetUserEventsFailure)
 }
 
 // getUserEvents Success
@@ -145,7 +157,6 @@ const onDeleteEventFailure = function () {
 }
 
 const onEditEventGetDetailsSuccess = function (res) {
-  console.log('res: ', res)
   // uiManager.resetForms()
   $('#edit-event-name').val(res.event.eventName)
   $('#event-id').val(res.event._id)
@@ -181,5 +192,6 @@ module.exports = {
   onDeleteEventFailure: onDeleteEventFailure,
   onEditEventGetDetailsSuccess: onEditEventGetDetailsSuccess,
   onEditEventGetDetailsFailure: onEditEventGetDetailsFailure,
-  onEditEventFailure: onEditEventFailure
+  onEditEventFailure: onEditEventFailure,
+  getUserEvents: getUserEvents
 }

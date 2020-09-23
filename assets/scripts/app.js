@@ -5,6 +5,7 @@ const events = require('./events')
 const uiManager = require('./uiManager')
 const calendar = require('./calendar')
 const store = require('./store')
+const ui = require('./ui')
 
 // defining variables for building the initial calendar
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -53,7 +54,6 @@ $(() => {
 
   // click create a new event from the event list form
   $('#btn-create-event').on('click', function () {
-    // events.getUserEvents()
     uiManager.resetForms(true)
     uiManager.views(false, false, false, true, false, false, true, true)
     $('#create-start-date').val(store.user.LDC)
@@ -63,14 +63,14 @@ $(() => {
   $('#anchor-show-events').on('click', function () {
     uiManager.resetForms(true)
     uiManager.views(false, false, false, false, true, false, true, true)
-    events.getUserEvents('all')
+    ui.getUserEvents('all')
   })
 
   // click return to events from the create event form
   $('.anchor-event-list').on('click', function () {
     uiManager.resetForms(true)
     uiManager.views(false, false, false, false, true, false, true, true)
-    events.getUserEvents(store.user.LDC)
+    ui.getUserEvents(store.user.LDC)
   })
 
   // edit and delete buttons for users events
@@ -78,7 +78,7 @@ $(() => {
   $('#user-events').on('click', '#event-delete', events.deleteEvent)
 
   $('#calendar-days').on('click', '#selectDate', function (event) {
-    events.getUserEvents(event.target.dataset.valueIndex)
+    ui.getUserEvents(event.target.dataset.valueIndex)
   })
 
   // event listener for clearing the failed log message
